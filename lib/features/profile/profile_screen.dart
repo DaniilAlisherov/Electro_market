@@ -86,6 +86,7 @@ class ProfileScreen extends StatelessWidget {
             _MenuRow(icon: Icons.favorite_border, label: AppStrings.favorites(language), onTap: () => context.push('/favorites')),
             _MenuRow(icon: Icons.location_on_outlined, label: AppStrings.addresses(language), onTap: () => context.push('/addresses')),
             _MenuRow(icon: Icons.history_rounded, label: AppStrings.returns(language), onTap: () => context.push('/returns')),
+            _MenuRow(icon: Icons.chat_bubble_outline_rounded, label: AppStrings.chats(language), onTap: () => context.push('/chats')),
           ] else if (user.role == UserRole.seller) ...[
             Row(children: [
               _StatCard(num: '${catalog.myProducts.length}', label: l == AppLanguage.kyrgyz ? 'товар' : 'товаров'),
@@ -95,8 +96,8 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(height: 8),
             _MenuRow(icon: Icons.inventory_2_outlined, label: AppStrings.myProducts(language), onTap: () => context.push('/my-products')),
             _MenuRow(icon: Icons.insights_outlined, label: AppStrings.analytics(language), onTap: () => context.push('/analytics')),
-            _MenuRow(icon: Icons.receipt_long_outlined, label: AppStrings.sellerOrders(language), onTap: () => context.push('/seller-orders')),
             _MenuRow(icon: Icons.bolt_outlined, label: AppStrings.productReviews(language), onTap: () => context.push('/product-reviews')),
+            _MenuRow(icon: Icons.chat_bubble_outline_rounded, label: AppStrings.chats(language), onTap: () => context.push('/chats')),
           ],
           const SizedBox(height: 12),
           _MenuRow(icon: Icons.support_agent_outlined, label: AppStrings.support(language), onTap: () => context.push('/support')),

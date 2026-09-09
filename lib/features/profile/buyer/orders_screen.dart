@@ -25,9 +25,7 @@ class OrdersScreen extends StatelessWidget {
               icon: Icons.receipt_long_outlined,
               title: 'Заказ №${order.id}',
               subtitle: order.summary,
-              onTap: sellerOrders.receiptFor(order.id) == null
-                  ? null
-                  : () => context.push('/receipt/${order.id}'),
+              onTap: () => context.push('/orders/${order.id}'),
               trailing: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -42,11 +40,10 @@ class OrdersScreen extends StatelessWidget {
                       PriceText(order.total, size: 12),
                     ],
                   ),
-                  if (sellerOrders.receiptFor(order.id) != null)
-                    const Padding(
-                      padding: EdgeInsets.only(left: 8),
-                      child: Icon(Icons.chevron_right_rounded, size: 18),
-                    ),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 8),
+                    child: Icon(Icons.chevron_right_rounded, size: 18),
+                  ),
                 ],
               ),
             ),

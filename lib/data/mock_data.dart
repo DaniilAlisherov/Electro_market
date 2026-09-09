@@ -274,6 +274,7 @@ final List<BuyerOrder> mockSellerOrders = [
     buyerPhone: '+996 555 123 456',
     createdAt: DateTime(2026, 9, 4),
     itemCount: 3,
+    address: 'г. Бишкек, ул. Ахунбаева 12, кв. 45',
   ),
   BuyerOrder(
     id: '10479',
@@ -284,6 +285,7 @@ final List<BuyerOrder> mockSellerOrders = [
     buyerPhone: '+996 700 234 567',
     createdAt: DateTime(2026, 9, 3),
     itemCount: 1,
+    address: 'г. Бишкек, ул. Чуй 128',
   ),
   BuyerOrder(
     id: '10471',
@@ -294,6 +296,7 @@ final List<BuyerOrder> mockSellerOrders = [
     buyerPhone: '+996 777 345 678',
     createdAt: DateTime(2026, 9, 2),
     itemCount: 1,
+    address: 'г. Бишкек, мкр. Асанбай 7-15',
   ),
   BuyerOrder(
     id: '10455',
@@ -304,6 +307,7 @@ final List<BuyerOrder> mockSellerOrders = [
     buyerPhone: '+996 500 456 789',
     createdAt: DateTime(2026, 9, 1),
     itemCount: 5,
+    address: 'г. Бишкек, ул. Токтогула 89',
   ),
   BuyerOrder(
     id: '10402',
@@ -314,6 +318,7 @@ final List<BuyerOrder> mockSellerOrders = [
     buyerPhone: '+996 550 567 890',
     createdAt: DateTime(2026, 8, 30),
     itemCount: 2,
+    address: 'г. Бишкек, ул. Манаса 34',
   ),
 ];
 

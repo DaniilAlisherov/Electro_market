@@ -8,6 +8,7 @@ import 'state/user_provider.dart';
 import 'state/app_settings_provider.dart';
 import 'state/seller_order_provider.dart';
 import 'state/review_provider.dart';
+import 'state/chat_provider.dart';
 
 void main() {
   final userProvider = UserProvider();
@@ -22,6 +23,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => CartProvider()),
         ChangeNotifierProvider(create: (_) => SellerOrderProvider()),
         ChangeNotifierProvider(create: (_) => ReviewProvider()),
+        ChangeNotifierProvider(create: (_) => ChatProvider()),
       ],
       child: ElectroMarketApp(router: router),
     ),

@@ -28,9 +28,11 @@ class AppStrings {
   static String profile(AppLanguage l) => _ky(l) ? 'Профиль' : 'Профиль';
   static String settings(AppLanguage l) => _ky(l) ? 'Жөндөөлөр' : 'Настройки';
   static String editProfile(AppLanguage l) => _ky(l) ? 'Профилди түзөтүү' : 'Редактировать профиль';
-  static String support(AppLanguage l) => _ky(l) ? 'Колдоо кызматы' : 'Техподдержка';
+  static String support(AppLanguage l) => _ky(l) ? 'Жардам керек' : 'Нужна помощь';
+  static String chats(AppLanguage l) => _ky(l) ? 'Чаттар' : 'Чаты';
   static String logout(AppLanguage l) => _ky(l) ? 'Чыгуу' : 'Выйти';
   static String orders(AppLanguage l) => _ky(l) ? 'Менин буйрутмаларым' : 'Мои заказы';
+  static String ordersTab(AppLanguage l) => _ky(l) ? 'Буйрутмалар' : 'Заказы';
   static String favorites(AppLanguage l) => _ky(l) ? 'Тандалгандар' : 'Избранное';
   static String addresses(AppLanguage l) => _ky(l) ? 'Жеткирүү даректери' : 'Адреса доставки';
   static String returns(AppLanguage l) => _ky(l) ? 'Тарых жана кайтаруулар' : 'История и возвраты';

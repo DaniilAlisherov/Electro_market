@@ -57,7 +57,7 @@ class CatalogScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 14),
-          _HeroBanner(language: l, onTap: () => _openCategory(context, 'panels')),
+          _HelpChoiceCard(language: l),
           SectionLabel(AppLanguage == AppLanguage.kyrgyz ? 'Категориялар' : 'Категории'),
           GridView.count(
             crossAxisCount: 3,
@@ -111,33 +111,112 @@ class CatalogScreen extends StatelessWidget {
   }
 }
 
-class _HeroBanner extends StatelessWidget {
+class _HelpChoiceCard extends StatelessWidget {
   final AppLanguage language;
-  final VoidCallback onTap;
-  const _HeroBanner({required this.language, required this.onTap});
+  const _HelpChoiceCard({required this.language});
 
   @override
   Widget build(BuildContext context) {
+    final isKyrgyz = language == AppLanguage.kyrgyz;
+    final scheme = Theme.of(context).colorScheme;
+    final items = isKyrgyz
+        ? const [
+            (Icons.shield_outlined, 'Коргоо'),
+            (Icons.cable_outlined, 'Кабель'),
+            (Icons.power_outlined, 'Розеткалар'),
+            (Icons.lightbulb_outline, 'Жарыктандыруу'),
+          ]
+        : const [
+            (Icons.shield_outlined, 'Защита'),
+            (Icons.cable_outlined, 'Кабель'),
+            (Icons.power_outlined, 'Розетки'),
+            (Icons.lightbulb_outline, 'Освещение'),
+          ];
+
+    void openHelp() => context.push('/chats/support');
+
     return Container(
-      padding: const EdgeInsets.fromLTRB(18, 18, 18, 20),
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 14),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(colors: [Color(0xFF1B2027), Color(0xFF262C34)], begin: Alignment.topLeft, end: Alignment.bottomRight),
+        gradient: const LinearGradient(
+          colors: [Color(0xFF1B2027), Color(0xFF262C34)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
         borderRadius: BorderRadius.circular(16),
         boxShadow: AppColors.cardShadow(dark: Theme.of(context).brightness == Brightness.dark),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(language == AppLanguage.kyrgyz ? 'АПТАНЫН СУНУШУ' : 'ПАРТИЯ НЕДЕЛИ', style: TextStyle(fontSize: 10, letterSpacing: 1.2, color: AppColors.copperLight, fontFamily: 'monospace')),
-          const SizedBox(height: 8),
-          SizedBox(width: 210, child: Text(language == AppLanguage.kyrgyz ? 'Жыйналган щиттер — 5 даанадан баштап 12% арзандатуу.' : 'Щиты в сборе — минус 12% при заказе от 5 шт.',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white, height: 1.25)),
+          Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      isKyrgyz ? 'ТАНДООГО ЖАРДАМ' : 'ПОМОЧЬ С ВЫБОРОМ',
+                      style: const TextStyle(fontSize: 10, letterSpacing: 1.1, color: AppColors.copperLight, fontFamily: 'monospace'),
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      isKyrgyz ? 'Кайсы бөлүм боюнча жардам керек?' : 'По какой категории нужна помощь?',
+                      style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w700, color: Colors.white, height: 1.2),
+                    ),
+                  ],
+                ),
+              ),
+              IconButton(
+                onPressed: openHelp,
+                style: IconButton.styleFrom(
+                  backgroundColor: scheme.primary.withValues(alpha: .16),
+                  foregroundColor: Colors.white,
+                ),
+                icon: const Icon(Icons.chat_bubble_outline_rounded, size: 19),
+              ),
+            ],
           ),
-          const SizedBox(height: 12),
-          ElevatedButton(
-            onPressed: onTap,
-            style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10)),
-            child: Row(mainAxisSize: MainAxisSize.min, children: [Text(language == AppLanguage.kyrgyz ? 'Көрүү' : 'Смотреть', style: TextStyle(fontSize: 12.5)), SizedBox(width: 6), Icon(Icons.arrow_forward, size: 14)]),
+          const SizedBox(height: 13),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: [
+              for (final item in items)
+                InkWell(
+                  onTap: openHelp,
+                  borderRadius: BorderRadius.circular(11),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 9),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: .075),
+                      borderRadius: BorderRadius.circular(11),
+                      border: Border.all(color: Colors.white.withValues(alpha: .10)),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(item.$1, color: Colors.white70, size: 16),
+                        const SizedBox(width: 6),
+                        Text(item.$2, style: const TextStyle(color: Colors.white, fontSize: 11.5, fontWeight: FontWeight.w500)),
+                      ],
+                    ),
+                  ),
+                ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          TextButton(
+            onPressed: openHelp,
+            style: TextButton.styleFrom(padding: EdgeInsets.zero, minimumSize: Size.zero, tapTargetSize: MaterialTapTargetSize.shrinkWrap),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(isKyrgyz ? 'Чатка өтүү' : 'Открыть чат', style: const TextStyle(color: Colors.white, fontSize: 12.5, fontWeight: FontWeight.w600)),
+                const SizedBox(width: 5),
+                const Icon(Icons.arrow_forward_rounded, color: Colors.white, size: 15),
+              ],
+            ),
           ),
         ],
       ),

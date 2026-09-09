@@ -65,6 +65,7 @@ class SellerOrderProvider extends ChangeNotifier {
     int itemCount = 0,
     List<ReceiptItem> receiptItems = const [],
     double delivery = 0,
+    String? address,
   }) {
     final id = (DateTime.now().millisecondsSinceEpoch % 1000000).toString().padLeft(6, '0');
     final order = BuyerOrder(
@@ -76,6 +77,7 @@ class SellerOrderProvider extends ChangeNotifier {
       buyerPhone: buyerPhone,
       createdAt: DateTime.now(),
       itemCount: itemCount,
+      address: address,
     );
     _liveOrders.insert(0, order);
 
@@ -108,6 +110,46 @@ class SellerOrderProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Ищет заказ покупателя по id среди «живых» заказов текущей сессии
+  /// и демо-заказов — используется в деталях заказа продавца.
+  BuyerOrder? orderById(String orderId) {
+    for (final o in _liveOrders) {
+      if (o.id == orderId) return o;
+    }
+    for (final o in mockSellerOrders) {
+      if (o.id == orderId) return o;
+    }
+    return null;
+  }
+
+  /// Разбивка заказа на позиции для экрана деталей: если для заказа
+  /// сохранён чек с товарами — используем его, иначе делим сумму заказа
+  /// поровну между позициями из текстового описания (для демо-заказов).
+  List<ReceiptItem> itemsFor(BuyerOrder order) {
+    final receipt = _receipts[order.id];
+    if (receipt != null && receipt.items.isNotEmpty) return receipt.items;
+
+    // Для демо-заказов покупателя ищем такую же запись в данных продавца,
+    // чтобы в подробностях показывались реальные названия товаров, а не только
+    // строка «3 товара».
+    var source = order;
+    for (final sellerOrder in mockSellerOrders) {
+      if (sellerOrder.id == order.id) {
+        source = sellerOrder;
+        break;
+      }
+    }
+
+    final parts = source.itemCount > 1
+        ? source.summary.split(',').map((s) => s.trim()).where((s) => s.isNotEmpty).toList()
+        : <String>[source.summary];
+    if (parts.isEmpty) {
+      return [ReceiptItem(name: order.summary, quantity: 1, total: order.total)];
+    }
+    final each = order.total / parts.length;
+    return [for (final p in parts) ReceiptItem(name: p, quantity: 1, total: each)];
+  }
+
   final Map<String, SellerOrderStage> _draftStages = {};
   SellerOrderStage draftStageFor(String draftId) => _draftStages[draftId] ?? SellerOrderStage.searching;
 
@@ -115,5 +157,13 @@ class SellerOrderProvider extends ChangeNotifier {
     if (_draftStages[draftId] == stage) return;
     _draftStages[draftId] = stage;
     notifyListeners();
+  }
+
+  /// Ищет черновик заказа (добавлен продавцом вручную со страницы товара) по id.
+  SellerOrderDraft? draftById(String draftId) {
+    for (final d in _drafts) {
+      if (d.id == draftId) return d;
+    }
+    return null;
   }
 }

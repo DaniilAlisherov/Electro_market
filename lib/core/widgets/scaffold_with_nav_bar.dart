@@ -48,17 +48,33 @@ class _ScaffoldWithNavBarState extends State<ScaffoldWithNavBar>
   }
 
   void _onTap(int index) {
-    if (index == 2 && context.read<UserProvider>().role == UserRole.seller) {
-      context.push('/my-products/add');
-      return;
+    final isSeller = context.read<UserProvider>().role == UserRole.seller;
+
+    if (isSeller) {
+      if (index == 2) {
+        context.push('/my-products/add');
+        return;
+      }
+      // У продавца вкладка «Заказы» — отдельный экран поверх шелла,
+      // а не branch стека, поэтому переключаем не через goBranch.
+      if (index == 3) {
+        HapticFeedback.selectionClick();
+        context.push('/seller-orders');
+        return;
+      }
     }
-    if (index == widget.navigationShell.currentIndex) {
-      widget.navigationShell.goBranch(index, initialLocation: true);
+
+    // У продавца индекс вкладки "Профиль" в баре (4) сдвинут из-за
+    // добавленной вкладки "Заказы", а branch у неё по-прежнему третий (0..3).
+    final branchIndex = (isSeller && index == 4) ? 3 : index;
+
+    if (branchIndex == widget.navigationShell.currentIndex) {
+      widget.navigationShell.goBranch(branchIndex, initialLocation: true);
       return;
     }
 
     HapticFeedback.selectionClick();
-    widget.navigationShell.goBranch(index, initialLocation: false);
+    widget.navigationShell.goBranch(branchIndex, initialLocation: false);
   }
 
   @override
@@ -80,7 +96,12 @@ class _ScaffoldWithNavBarState extends State<ScaffoldWithNavBar>
       bottomNavigationBar: SafeArea(
         minimum: const EdgeInsets.fromLTRB(14, 0, 14, 10),
         child: _FloatingNavBar(
-          currentIndex: navigationShell.currentIndex,
+          // У продавца добавлена вкладка "Заказы" перед "Профилем", поэтому
+          // индекс Профиля в панели (4) отличается от индекса его branch'а
+          // в шелле (3). У покупателя всё как раньше — индексы совпадают.
+          currentIndex: role == UserRole.seller
+              ? (navigationShell.currentIndex == 3 ? 4 : navigationShell.currentIndex)
+              : navigationShell.currentIndex,
           cartCount: cartCount,
           language: language,
           isSeller: role == UserRole.seller,
@@ -151,11 +172,19 @@ class _FloatingNavBar extends StatelessWidget {
             onTap: () => onTap(2),
             badgeCount: isSeller ? 0 : cartCount,
           ),
+          // Вкладка "Заказы" — только для продавца.
+          if (isSeller)
+            _NavItem(
+              icon: Icons.receipt_long_outlined,
+              label: AppStrings.ordersTab(language),
+              selected: currentIndex == 3,
+              onTap: () => onTap(3),
+            ),
           _NavItem(
             icon: Icons.person_outline_rounded,
             label: AppStrings.profile(language),
-            selected: currentIndex == 3,
-            onTap: () => onTap(3),
+            selected: currentIndex == (isSeller ? 4 : 3),
+            onTap: () => onTap(isSeller ? 4 : 3),
           ),
         ],
       ),

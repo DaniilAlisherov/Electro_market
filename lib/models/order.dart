@@ -64,6 +64,8 @@ class BuyerOrder {
   final DateTime? createdAt;
   /// Количество товарных позиций в заказе.
   final int itemCount;
+  /// Адрес доставки заказа — показывается продавцу в деталях заказа.
+  final String? address;
 
   const BuyerOrder({
     required this.id,
@@ -74,6 +76,7 @@ class BuyerOrder {
     this.buyerPhone = '',
     this.createdAt,
     this.itemCount = 0,
+    this.address,
   });
 }
 

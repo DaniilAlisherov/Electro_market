@@ -18,14 +18,17 @@ import '../../features/profile/change_password_screen.dart';
 import '../../features/profile/buyer/payment_screen.dart';
 import '../../features/checkout_screen.dart';
 import '../../features/profile/buyer/orders_screen.dart';
+import '../../features/profile/buyer/order_detail_screen.dart';
 import '../../features/profile/buyer/favorites_screen.dart';
 import '../../features/profile/buyer/addresses_screen.dart';
 import '../../features/profile/buyer/address_form_screen.dart';
 import '../../features/profile/buyer/returns_screen.dart';
+import '../../features/profile/chats_screen.dart';
 import '../../features/profile/seller/my_products_screen.dart';
 import '../../features/profile/seller/add_product_screen.dart';
 import '../../features/profile/seller/analytics_screen.dart';
 import '../../features/profile/seller/seller_orders_screen.dart';
+import '../../features/profile/seller/seller_order_detail_screen.dart';
 import '../../features/profile/seller/product_reviews_screen.dart';
 import '../../features/support/support_screen.dart';
 import '../../features/receipt_screen.dart';
@@ -124,6 +127,7 @@ GoRouter buildAppRouter(UserProvider userProvider) {
 
       // Раздел покупателя
       GoRoute(path: '/orders', parentNavigatorKey: _rootNavigatorKey, pageBuilder: (c, s) => _smoothPage(const OrdersScreen(), s)),
+      GoRoute(path: '/orders/:orderId', parentNavigatorKey: _rootNavigatorKey, pageBuilder: (c, s) => _smoothPage(BuyerOrderDetailScreen(orderId: s.pathParameters['orderId']!), s)),
       GoRoute(path: '/favorites', parentNavigatorKey: _rootNavigatorKey, pageBuilder: (c, s) => _smoothPage(const FavoritesScreen(), s)),
       GoRoute(path: '/addresses', parentNavigatorKey: _rootNavigatorKey, pageBuilder: (c, s) => _smoothPage(const AddressesScreen(), s)),
       GoRoute(path: '/addresses/edit', parentNavigatorKey: _rootNavigatorKey, pageBuilder: (c, s) => _smoothPage(const AddressFormScreen(), s)),
@@ -139,12 +143,19 @@ GoRouter buildAppRouter(UserProvider userProvider) {
       GoRoute(path: '/receipt-scan', parentNavigatorKey: _rootNavigatorKey, pageBuilder: (c, s) => _smoothPage(const ReceiptScannerScreen(), s)),
       GoRoute(path: '/edit-profile', parentNavigatorKey: _rootNavigatorKey, pageBuilder: (c, s) => _smoothPage(const EditProfileScreen(), s)),
       GoRoute(path: '/support', parentNavigatorKey: _rootNavigatorKey, pageBuilder: (c, s) => _smoothPage(const SupportScreen(), s)),
+      GoRoute(path: '/chats', parentNavigatorKey: _rootNavigatorKey, pageBuilder: (c, s) => _smoothPage(const ChatsScreen(), s)),
+      GoRoute(path: '/chats/:chatId', parentNavigatorKey: _rootNavigatorKey, pageBuilder: (c, s) => _smoothPage(ChatConversationScreen(chatId: s.pathParameters['chatId']!), s)),
 
       // Раздел продавца
       GoRoute(path: '/my-products', parentNavigatorKey: _rootNavigatorKey, pageBuilder: (c, s) => _smoothPage(const MyProductsScreen(), s)),
       GoRoute(path: '/my-products/add', parentNavigatorKey: _rootNavigatorKey, pageBuilder: (c, s) => _smoothPage(const AddProductScreen(), s)),
       GoRoute(path: '/analytics', parentNavigatorKey: _rootNavigatorKey, pageBuilder: (c, s) => _smoothPage(const AnalyticsScreen(), s)),
       GoRoute(path: '/seller-orders', parentNavigatorKey: _rootNavigatorKey, pageBuilder: (c, s) => _smoothPage(const SellerOrdersScreen(), s)),
+      GoRoute(
+        path: '/seller-orders/:orderId',
+        parentNavigatorKey: _rootNavigatorKey,
+        pageBuilder: (c, s) => _smoothPage(SellerOrderDetailScreen(orderId: s.pathParameters['orderId']!), s),
+      ),
       GoRoute(path: '/product-reviews', parentNavigatorKey: _rootNavigatorKey, pageBuilder: (c, s) => _smoothPage(const ProductReviewsScreen(), s)),
     ],
   );

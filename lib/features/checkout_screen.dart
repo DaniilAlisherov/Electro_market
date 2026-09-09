@@ -75,6 +75,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           ),
       ],
       delivery: CartProvider.deliveryFee,
+      address: '${user.address!.label}: ${user.address!.details}',
     );
 
     cart.clear();
