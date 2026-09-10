@@ -109,7 +109,7 @@ class _OrderDetailView extends StatelessWidget {
                   width: 44,
                   height: 44,
                   decoration: BoxDecoration(color: Theme.of(context).colorScheme.surfaceContainerHigh, shape: BoxShape.circle),
-                  child: const Icon(Icons.person_outline, size: 22, color: AppColors.inkSoft),
+                  child: Icon(Icons.person_outline, size: 22, color: Theme.of(context).colorScheme.onSurfaceVariant),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
@@ -118,12 +118,12 @@ class _OrderDetailView extends StatelessWidget {
                     children: [
                       Text(
                         title,
-                        style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: AppColors.ink),
+                        style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: Theme.of(context).colorScheme.onSurface),
                       ),
                       const SizedBox(height: 4),
                       Text(
                         address ?? (isKyrgyz ? 'Дарек көрсөтүлгөн эмес' : 'Адрес не указан'),
-                        style: const TextStyle(fontSize: 12, color: AppColors.inkFaint),
+                        style: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.onSurfaceVariant),
                       ),
                     ],
                   ),
@@ -138,7 +138,7 @@ class _OrderDetailView extends StatelessWidget {
                         ),
                       );
                     },
-                    icon: const Icon(Icons.location_on_outlined, color: AppColors.copper),
+                    icon: Icon(Icons.location_on_outlined, color: Theme.of(context).colorScheme.primary),
                     tooltip: isKyrgyz ? 'Картада ачуу' : 'Открыть на карте',
                   ),
               ],
@@ -165,7 +165,7 @@ class _OrderDetailView extends StatelessWidget {
                         Expanded(
                           child: Text(
                             item.quantity > 1 ? '${item.name} ×${item.quantity}' : item.name,
-                            style: const TextStyle(fontSize: 13, color: AppColors.ink),
+                            style: TextStyle(fontSize: 13, color: Theme.of(context).colorScheme.onSurface),
                           ),
                         ),
                         PriceText(item.total, size: 13),
@@ -179,7 +179,7 @@ class _OrderDetailView extends StatelessWidget {
                     children: [
                       Text(
                         isKyrgyz ? 'Жыйынтыгы:' : 'Итого:',
-                        style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: AppColors.ink),
+                        style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: Theme.of(context).colorScheme.onSurface),
                       ),
                       const Spacer(),
                       PriceText(total, size: 15),
@@ -223,9 +223,9 @@ class _StageOption extends StatelessWidget {
         width: double.infinity,
         padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
         decoration: BoxDecoration(
-          color: selected ? scheme.primary : AppColors.card,
+          color: selected ? scheme.primary : scheme.surfaceContainer,
           borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: selected ? scheme.primary : AppColors.line),
+          border: Border.all(color: selected ? scheme.primary : scheme.outlineVariant),
           boxShadow: selected
               ? AppColors.floatingShadow(dark: dark, tint: scheme.primary)
               : AppColors.cardShadow(dark: dark),
@@ -235,7 +235,7 @@ class _StageOption extends StatelessWidget {
             Icon(
               selected ? Icons.radio_button_checked_rounded : Icons.radio_button_off_rounded,
               size: 18,
-              color: selected ? Colors.white : AppColors.inkFaint,
+              color: selected ? Colors.white : scheme.onSurfaceVariant,
             ),
             const SizedBox(width: 10),
             Text(
@@ -243,7 +243,7 @@ class _StageOption extends StatelessWidget {
               style: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
-                color: selected ? Colors.white : AppColors.ink,
+                color: selected ? Colors.white : scheme.onSurface,
               ),
             ),
           ],
