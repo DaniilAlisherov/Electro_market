@@ -70,9 +70,9 @@ class _CustomerRow extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
-        color: AppColors.card,
+        color: Theme.of(context).colorScheme.surfaceContainer,
         borderRadius: BorderRadius.circular(30),
-        border: Border.all(color: AppColors.line),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
         boxShadow: AppColors.cardShadow(dark: dark),
       ),
       clipBehavior: Clip.antiAlias,
@@ -85,17 +85,17 @@ class _CustomerRow extends StatelessWidget {
               Container(
                 width: 40,
                 height: 40,
-                decoration: const BoxDecoration(color: AppColors.paper2, shape: BoxShape.circle),
-                child: Icon(icon, size: 19, color: AppColors.inkSoft),
+                decoration: BoxDecoration(color: Theme.of(context).colorScheme.surfaceContainerHigh, shape: BoxShape.circle),
+                child: Icon(icon, size: 19, color: Theme.of(context).colorScheme.onSurfaceVariant),
               ),
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
                   name,
-                  style: const TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: AppColors.ink),
+                  style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: Theme.of(context).colorScheme.onSurface),
                 ),
               ),
-              const Icon(Icons.chevron_right_rounded, size: 18, color: AppColors.inkFaint),
+              Icon(Icons.chevron_right_rounded, size: 18, color: Theme.of(context).colorScheme.onSurfaceVariant),
             ],
           ),
         ),

@@ -48,8 +48,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(l == AppLanguage.kyrgyz
-              ? 'Алгач Манас шаарындагы жеткирүү дарегин кошуңуз.'
-              : 'Сначала добавьте адрес доставки в городе Манас.'),
+              ? 'Алгач жеткирүү дарегин кошуңуз.'
+              : 'Сначала добавьте адрес доставки.'),
           behavior: SnackBarBehavior.floating,
         ),
       );
@@ -168,11 +168,15 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             title: Text(l == AppLanguage.kyrgyz ? 'Накталай төлөө' : 'Оплата при получении'),
             contentPadding: EdgeInsets.zero,
           ),
-          if (_method == 'online' && card == null)
+          if (_method == 'online' && !cardValid)
             OutlinedButton.icon(
               onPressed: () => context.push('/payments'),
               icon: const Icon(Icons.add_card_rounded),
-              label: Text(l == AppLanguage.kyrgyz ? 'Карта кошуу' : 'Добавить карту'),
+              label: Text(
+                card == null
+                    ? (l == AppLanguage.kyrgyz ? 'Карта кошуу' : 'Добавить карту')
+                    : (l == AppLanguage.kyrgyz ? 'Картаны өзгөртүү' : 'Изменить карту'),
+              ),
             ),
           const SizedBox(height: 16),
           Container(

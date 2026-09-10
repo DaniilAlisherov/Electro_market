@@ -22,13 +22,13 @@ class AddressesScreen extends StatelessWidget {
                 children: [
                   Container(
                     padding: const EdgeInsets.all(14),
-                    decoration: BoxDecoration(color: AppColors.card, borderRadius: BorderRadius.circular(14), border: Border.all(color: AppColors.line), boxShadow: AppColors.cardShadow(dark: Theme.of(context).brightness == Brightness.dark)),
+                    decoration: BoxDecoration(color: Theme.of(context).colorScheme.surfaceContainer, borderRadius: BorderRadius.circular(14), border: Border.all(color: Theme.of(context).colorScheme.outlineVariant), boxShadow: AppColors.cardShadow(dark: Theme.of(context).brightness == Brightness.dark)),
                     child: Row(
                       children: [
                         Container(
                           width: 42,
                           height: 42,
-                          decoration: BoxDecoration(color: AppColors.paper2, borderRadius: BorderRadius.circular(11)),
+                          decoration: BoxDecoration(color: Theme.of(context).colorScheme.surfaceContainerHigh, borderRadius: BorderRadius.circular(11)),
                           child: const Icon(Icons.location_on_outlined, size: 19, color: AppColors.inkSoft),
                         ),
                         const SizedBox(width: 12),

@@ -97,9 +97,9 @@ class _OrderDetailView extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(
-              color: AppColors.card,
+              color: Theme.of(context).colorScheme.surfaceContainer,
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: AppColors.line),
+              border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
               boxShadow: AppColors.cardShadow(dark: dark),
             ),
             child: Row(
@@ -108,7 +108,7 @@ class _OrderDetailView extends StatelessWidget {
                 Container(
                   width: 44,
                   height: 44,
-                  decoration: const BoxDecoration(color: AppColors.paper2, shape: BoxShape.circle),
+                  decoration: BoxDecoration(color: Theme.of(context).colorScheme.surfaceContainerHigh, shape: BoxShape.circle),
                   child: const Icon(Icons.person_outline, size: 22, color: AppColors.inkSoft),
                 ),
                 const SizedBox(width: 12),
@@ -149,9 +149,9 @@ class _OrderDetailView extends StatelessWidget {
           // Товары в заказе.
           Container(
             decoration: BoxDecoration(
-              color: AppColors.card,
+              color: Theme.of(context).colorScheme.surfaceContainer,
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: AppColors.line),
+              border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
               boxShadow: AppColors.cardShadow(dark: dark),
             ),
             clipBehavior: Clip.antiAlias,
@@ -172,7 +172,7 @@ class _OrderDetailView extends StatelessWidget {
                       ],
                     ),
                   ),
-                const Divider(height: 1, color: AppColors.line),
+                Divider(height: 1, color: Theme.of(context).colorScheme.outlineVariant),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 13),
                   child: Row(

@@ -59,15 +59,15 @@ class _BuyerOrderDetailView extends StatelessWidget {
               children: [
                 for (var i = 0; i < items.length; i++) ...[
                   _ItemRow(item: items[i]),
-                  if (i != items.length - 1) const Divider(height: 1, color: AppColors.line),
+                  if (i != items.length - 1) Divider(height: 1, color: Theme.of(context).colorScheme.outlineVariant),
                 ],
-                const Divider(height: 1, color: AppColors.line),
+                Divider(height: 1, color: Theme.of(context).colorScheme.outlineVariant),
                 _SummaryRow(label: isKyrgyz ? 'Товарлар:' : 'Товары:', value: subtotal),
                 _SummaryRow(label: isKyrgyz ? 'Жеткирүү:' : 'Доставка:', value: delivery),
                 const SizedBox(height: 4),
                 Row(
                   children: [
-                    Text(isKyrgyz ? 'Жыйынтыгы:' : 'Итого:', style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800, color: AppColors.ink)),
+                    Text(isKyrgyz ? 'Жыйынтыгы:' : 'Итого:', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800, color: Theme.of(context).colorScheme.onSurface)),
                     const Spacer(),
                     PriceText(order.total, size: 17),
                   ],
@@ -86,7 +86,7 @@ class _BuyerOrderDetailView extends StatelessWidget {
                 Expanded(
                   child: Text(
                     order.address ?? (isKyrgyz ? 'Дарек көрсөтүлгөн эмес' : 'Адрес не указан'),
-                    style: const TextStyle(fontSize: 13, height: 1.35, color: AppColors.ink),
+                    style: TextStyle(fontSize: 13, height: 1.35, color: Theme.of(context).colorScheme.onSurface),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -104,17 +104,17 @@ class _BuyerOrderDetailView extends StatelessWidget {
                 Container(
                   width: 42,
                   height: 42,
-                  decoration: BoxDecoration(color: AppColors.paper2, borderRadius: BorderRadius.circular(13)),
-                  child: const Icon(Icons.storefront_outlined, color: AppColors.inkSoft),
+                  decoration: BoxDecoration(color: Theme.of(context).colorScheme.surfaceContainerHigh, borderRadius: BorderRadius.circular(13)),
+                  child: Icon(Icons.storefront_outlined, color: Theme.of(context).colorScheme.onSurfaceVariant),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(isKyrgyz ? 'Продавец' : 'Продавец', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: AppColors.ink)),
+                      Text(isKyrgyz ? 'Продавец' : 'Продавец', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: Theme.of(context).colorScheme.onSurface)),
                       const SizedBox(height: 3),
-                      Text(isKyrgyz ? 'Маалымат заказдын ичинде' : 'Информация доступна в заказе', style: const TextStyle(fontSize: 11, color: AppColors.inkFaint)),
+                      Text(isKyrgyz ? 'Маалымат заказдын ичинде' : 'Информация доступна в заказе', style: TextStyle(fontSize: 11, color: Theme.of(context).colorScheme.onSurfaceVariant)),
                     ],
                   ),
                 ),
@@ -236,9 +236,9 @@ class _SectionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
         padding: const EdgeInsets.all(15),
-        decoration: BoxDecoration(color: AppColors.card, borderRadius: BorderRadius.circular(18), border: Border.all(color: AppColors.line), boxShadow: AppColors.cardShadow(dark: dark)),
+        decoration: BoxDecoration(color: Theme.of(context).colorScheme.surfaceContainer, borderRadius: BorderRadius.circular(18), border: Border.all(color: Theme.of(context).colorScheme.outlineVariant), boxShadow: AppColors.cardShadow(dark: dark)),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Row(children: [Icon(icon, size: 19, color: Theme.of(context).colorScheme.primary), const SizedBox(width: 8), Text(title, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800, color: AppColors.ink))]),
+          Row(children: [Icon(icon, size: 19, color: Theme.of(context).colorScheme.primary), const SizedBox(width: 8), Text(title, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800, color: Theme.of(context).colorScheme.onSurface))]),
           const SizedBox(height: 13),
           child,
         ]),
@@ -275,21 +275,21 @@ class _ItemRow extends StatelessWidget {
             height: 56,
             padding: const EdgeInsets.all(5),
             decoration: BoxDecoration(
-              color: AppColors.paper2,
+              color: Theme.of(context).colorScheme.surfaceContainerHigh,
               borderRadius: BorderRadius.circular(12),
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(9),
               child: image != null
                   ? Image.asset(image, fit: BoxFit.contain)
-                  : const Icon(Icons.inventory_2_outlined, color: AppColors.inkSoft),
+                  : Icon(Icons.inventory_2_outlined, color: Theme.of(context).colorScheme.onSurfaceVariant),
             ),
           ),
           const SizedBox(width: 11),
           Expanded(
             child: Text(
               item.quantity > 1 ? '${item.name} ×${item.quantity}' : item.name,
-              style: const TextStyle(fontSize: 13, color: AppColors.ink),
+              style: TextStyle(fontSize: 13, color: Theme.of(context).colorScheme.onSurface),
             ),
           ),
           PriceText(item.total, size: 13),
@@ -304,7 +304,7 @@ class _SummaryRow extends StatelessWidget {
   final double value;
   const _SummaryRow({required this.label, required this.value});
   @override
-  Widget build(BuildContext context) => Padding(padding: const EdgeInsets.symmetric(vertical: 4), child: Row(children: [Text(label, style: const TextStyle(fontSize: 12, color: AppColors.inkFaint)), const Spacer(), PriceText(value, size: 12)]));
+  Widget build(BuildContext context) => Padding(padding: const EdgeInsets.symmetric(vertical: 4), child: Row(children: [Text(label, style: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.onSurfaceVariant)), const Spacer(), PriceText(value, size: 12)]));
 }
 
 class _InfoRow extends StatelessWidget {
@@ -312,7 +312,7 @@ class _InfoRow extends StatelessWidget {
   final String value;
   const _InfoRow({required this.label, required this.value});
   @override
-  Widget build(BuildContext context) => Row(children: [Text(label, style: const TextStyle(fontSize: 12, color: AppColors.inkFaint)), const Spacer(), Flexible(child: Text(value, textAlign: TextAlign.right, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: AppColors.ink)))]);
+  Widget build(BuildContext context) => Row(children: [Text(label, style: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.onSurfaceVariant)), const Spacer(), Flexible(child: Text(value, textAlign: TextAlign.right, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Theme.of(context).colorScheme.onSurface)))]);
 }
 
 class _TrackingStep extends StatelessWidget {
@@ -324,6 +324,6 @@ class _TrackingStep extends StatelessWidget {
   Widget build(BuildContext context) => Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Column(children: [Container(width: 13, height: 13, decoration: BoxDecoration(shape: BoxShape.circle, color: active ? Theme.of(context).colorScheme.primary : AppColors.line)), if (!last) Container(width: 2, height: 29, color: active ? Theme.of(context).colorScheme.primary : AppColors.line)]),
         const SizedBox(width: 12),
-        Padding(padding: const EdgeInsets.only(top: 0), child: Text(label, style: TextStyle(fontSize: 13, fontWeight: active ? FontWeight.w700 : FontWeight.w500, color: active ? AppColors.ink : AppColors.inkFaint))),
+        Padding(padding: const EdgeInsets.only(top: 0), child: Text(label, style: TextStyle(fontSize: 13, fontWeight: active ? FontWeight.w700 : FontWeight.w500, color: active ? Theme.of(context).colorScheme.onSurface : Theme.of(context).colorScheme.onSurfaceVariant))),
       ]);
 }

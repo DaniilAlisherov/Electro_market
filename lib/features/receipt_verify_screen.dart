@@ -45,9 +45,9 @@ class _ReceiptVerifyScreenState extends State<ReceiptVerifyScreen> {
           Container(
             padding: const EdgeInsets.all(18),
             decoration: BoxDecoration(
-              color: AppColors.card,
+              color: Theme.of(context).colorScheme.surfaceContainer,
               borderRadius: BorderRadius.circular(18),
-              border: Border.all(color: AppColors.line),
+              border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
               boxShadow: AppColors.cardShadow(dark: Theme.of(context).brightness == Brightness.dark),
             ),
             child: Column(

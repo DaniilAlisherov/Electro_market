@@ -58,9 +58,9 @@ class _ReceiptCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: AppColors.card,
+        color: Theme.of(context).colorScheme.surfaceContainer,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: AppColors.line),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
         boxShadow: AppColors.cardShadow(dark: dark),
       ),
       child: Column(

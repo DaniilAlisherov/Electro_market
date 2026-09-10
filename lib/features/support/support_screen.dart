@@ -104,13 +104,13 @@ class _ContactRow extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(13),
-      decoration: BoxDecoration(color: AppColors.card, borderRadius: BorderRadius.circular(14), border: Border.all(color: AppColors.line), boxShadow: AppColors.cardShadow(dark: Theme.of(context).brightness == Brightness.dark)),
+      decoration: BoxDecoration(color: Theme.of(context).colorScheme.surfaceContainer, borderRadius: BorderRadius.circular(14), border: Border.all(color: Theme.of(context).colorScheme.outlineVariant), boxShadow: AppColors.cardShadow(dark: Theme.of(context).brightness == Brightness.dark)),
       child: Row(
         children: [
           Container(
             width: 38,
             height: 38,
-            decoration: BoxDecoration(color: AppColors.paper2, borderRadius: BorderRadius.circular(10)),
+            decoration: BoxDecoration(color: Theme.of(context).colorScheme.surfaceContainerHigh, borderRadius: BorderRadius.circular(10)),
             child: Icon(icon, size: 17, color: AppColors.inkSoft),
           ),
           const SizedBox(width: 12),
@@ -144,7 +144,7 @@ class _FaqTileState extends State<_FaqTile> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
-      decoration: BoxDecoration(color: AppColors.card, borderRadius: BorderRadius.circular(12), border: Border.all(color: AppColors.line), boxShadow: AppColors.cardShadow(dark: Theme.of(context).brightness == Brightness.dark)),
+      decoration: BoxDecoration(color: Theme.of(context).colorScheme.surfaceContainer, borderRadius: BorderRadius.circular(12), border: Border.all(color: Theme.of(context).colorScheme.outlineVariant), boxShadow: AppColors.cardShadow(dark: Theme.of(context).brightness == Brightness.dark)),
       child: AnimatedSize(
         duration: const Duration(milliseconds: 220),
         curve: Curves.easeOut,

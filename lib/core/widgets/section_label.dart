@@ -122,9 +122,9 @@ class InfoListTile extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(13),
       decoration: BoxDecoration(
-        color: AppColors.card,
+        color: Theme.of(context).colorScheme.surfaceContainer,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: AppColors.line),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
         boxShadow: AppColors.cardShadow(dark: Theme.of(context).brightness == Brightness.dark),
       ),
       child: InkWell(
@@ -135,15 +135,15 @@ class InfoListTile extends StatelessWidget {
             Container(
               width: 42,
               height: 42,
-              decoration: BoxDecoration(color: AppColors.paper2, borderRadius: BorderRadius.circular(11)),
-              child: Icon(icon, size: 19, color: AppColors.inkSoft),
+              decoration: BoxDecoration(color: Theme.of(context).colorScheme.surfaceContainerHigh, borderRadius: BorderRadius.circular(11)),
+              child: Icon(icon, size: 19, color: Theme.of(context).colorScheme.onSurfaceVariant),
             ),
             const SizedBox(width: 12),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title, style: const TextStyle(fontSize: 12.5, fontWeight: FontWeight.w600, color: AppColors.ink)),
+                  Text(title, style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.w600, color: Theme.of(context).colorScheme.onSurface)),
                   const SizedBox(height: 2),
                   Text(subtitle, style: const TextStyle(fontSize: 11, color: AppColors.inkFaint)),
                 ],

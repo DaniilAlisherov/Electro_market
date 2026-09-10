@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../models/product.dart';
+import '../../../models/category.dart';
 import '../../../state/catalog_provider.dart';
 
 class _SpecRow {

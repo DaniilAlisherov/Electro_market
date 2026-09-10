@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/widgets/price_text.dart';
@@ -67,7 +68,7 @@ class CartScreen extends StatelessWidget {
                           children: [
                             _sumRow(context, l == AppLanguage.kyrgyz ? 'Товарлар (${cart.totalCount})' : 'Товары (${cart.totalCount})', cart.subtotal),
                             _sumRow(context, l == AppLanguage.kyrgyz ? 'Жеткирүү' : 'Доставка', CartProvider.deliveryFee),
-                            const Divider(height: 20, color: AppColors.lineSoft),
+                            Divider(height: 20, color: Theme.of(context).colorScheme.outlineVariant),
                             _sumRow(context, l == AppLanguage.kyrgyz ? 'Жыйынтык' : 'Итого', cart.total, bold: true),
                           ],
                         ),
@@ -82,12 +83,7 @@ class CartScreen extends StatelessWidget {
                 child: SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {
-                      context.read<CartProvider>().clear();
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text(l == AppLanguage.kyrgyz ? 'Буйрутма түзүлдү' : 'Заказ оформлен'), behavior: SnackBarBehavior.floating),
-                      );
-                    },
+                    onPressed: () => context.push('/checkout'),
                     child: Text(l == AppLanguage.kyrgyz ? 'Буйрутма берүү' : 'Оформить заказ'),
                   ),
                 ),

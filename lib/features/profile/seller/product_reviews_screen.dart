@@ -56,9 +56,9 @@ class ProductReviewsScreen extends StatelessWidget {
                         margin: const EdgeInsets.only(bottom: 10),
                         padding: const EdgeInsets.all(13),
                         decoration: BoxDecoration(
-                          color: AppColors.card,
+                          color: Theme.of(context).colorScheme.surfaceContainer,
                           borderRadius: BorderRadius.circular(14),
-                          border: Border.all(color: AppColors.line),
+                          border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
                           boxShadow: AppColors.softShadow(dark: Theme.of(context).brightness == Brightness.dark),
                         ),
                         child: Column(
